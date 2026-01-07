@@ -1,8 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
-import authRoutes from "./routes/auth.route.js"
-import messageRoutes from "./routes/message.route.js"
+import authRoutes from "./routes/auth.route.js";
+import messageRoutes from "./routes/message.route.js";
+import { connectDB } from "./lib/db.js";
 
 dotenv.config();
 const app = express();
@@ -10,19 +11,44 @@ const __dirname = path.resolve();
 
 const PORT = process.env.PORT || 3000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/api/auth", authRoutes);
 app.use("/api/auth", messageRoutes)
 
-if(process.env.NODE_ENV == "production")
-{
+if (process.env.NODE_ENV == "production") {
     app.use(express.static(path.join(__dirname, "../frontend/dist")))
 
 
-    app.get("*", (_,res) =>
-    {
-       res.sendFile(path.join(__dirname, "../frontend/dist/index.html")) 
+    app.get("*", (_, res) => {
+        res.sendFile(path.join(__dirname, "../frontend/dist/index.html"))
     })
 }
 
 
-app.listen(PORT, () => console.log("server running on port: " + PORT));
+const server = app.listen(PORT, () => {
+    console.log("server running on port: " + PORT)
+    connectDB()
+});
+
+server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+        console.error(`Port ${PORT} is already in use. Please kill existing processes or use a different port.`);
+        process.exit(1);
+    }
+});
+
+process.on('SIGTERM', () => {
+    server.close(() => {
+        console.log('Server closed');
+        process.exit(0);
+    });
+});
+
+process.on('SIGINT', () => {
+    server.close(() => {
+        console.log('Server closed');
+        process.exit(0);
+    });
+});
