@@ -54,6 +54,7 @@ export const signup = async (req, res) => {
 export const login = async (req, res) =>
 {
     const { email,password} = req.body;
+
      if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required" });
   }
@@ -85,4 +86,9 @@ export const logout = async (_, res) =>
 {
     res.cookie("jwt","",{maxAge:0});
     res.status(200).json({ message: "Logged out successfully" });
+}
+
+export const updateProfile = async (req,res) =>
+{
+    
 }
