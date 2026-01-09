@@ -5,9 +5,15 @@ import messageRoutes from "./routes/message.route.js";
 import { connectDB } from "./lib/db.js";
 import { ENV } from "./lib/env.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 const app = express();
 const __dirname = path.resolve();
+
+app.use(cors({
+    origin: ENV.CLIENT_URL,
+    credentials: true,
+}));
 
 const PORT = ENV.PORT || 3000;
 
