@@ -3,12 +3,12 @@ import ChatPage from './pages/ChatPage'
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import { useStore } from './store/useAuthStore'
+import { useAuthStore } from './store/useAuthStore'
 import {Toaster} from 'react-hot-toast';
 
 
 function App() {
-  const { checkAuth, isCheckingAuth, authUser } = useStore();
+  const { checkAuth, isCheckingAuth, authUser } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
