@@ -1,6 +1,6 @@
 import React from 'react'
 
-function LoginPage() {
+function LoginPage({ myName }) {
   return <div>LoginPage</div>
   
 }
