@@ -27,10 +27,10 @@ function ProfileHeader() {
       img.onload = async () => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
-        
+
         const maxSize = 800;
         let { width, height } = img;
-        
+
         if (width > height) {
           if (width > maxSize) {
             height = (height * maxSize) / width;
@@ -42,13 +42,13 @@ function ProfileHeader() {
             height = maxSize;
           }
         }
-        
+
         canvas.width = width;
         canvas.height = height;
-        
+
         ctx.drawImage(img, 0, 0, width, height);
         const compressedBase64 = canvas.toDataURL('image/jpeg', 0.8);
-        
+
         setSelectedImg(compressedBase64);
         await updateProfile({ profilePic: compressedBase64 });
       };
@@ -60,7 +60,7 @@ function ProfileHeader() {
     <div className="p-6 border-b border-slate-700/50">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          
+
           <div className="avatar online">
             <button
               className="size-14 rounded-full overflow-hidden relative group"
@@ -85,7 +85,7 @@ function ProfileHeader() {
             />
           </div>
 
-         
+
           <div>
             <h3 className="text-slate-200 font-medium text-base max-w-[180px] truncate">
               {authUser.fullName}
@@ -95,9 +95,9 @@ function ProfileHeader() {
           </div>
         </div>
 
-        
+
         <div className="flex gap-4 items-center">
-       
+
           <button
             className="text-slate-400 hover:text-slate-200 transition-colors"
             onClick={logout}
@@ -105,12 +105,12 @@ function ProfileHeader() {
             <LogOutIcon className="size-5" />
           </button>
 
-        
+
           <button
             className="text-slate-400 hover:text-slate-200 transition-colors"
             onClick={() => {
-          
-              mouseClickSound.currentTime = 0; 
+
+              mouseClickSound.currentTime = 0;
               mouseClickSound.play().catch((error) => console.log("Audio play failed:", error));
               toggleSound();
             }}
