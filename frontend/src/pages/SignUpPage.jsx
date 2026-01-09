@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { useStore } from "../store/useAuthStore";
+import { useAuthStore } from "../store/useAuthStore";
 import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
 import { MessageCircleIcon, LockIcon, MailIcon, UserIcon, LoaderIcon, Sparkles } from "lucide-react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({ fullName: "", email: "", password: "" });
-  const { signup, isSigningUp } = useStore();
+  const { signup, isSigningUp } = useAuthStore();
   const [focusedInput, setFocusedInput] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
