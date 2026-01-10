@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.MODE === "development" ? "http://localhost:3001/api" : "/api",
+  baseURL: import.meta.env.MODE === "development" ? "http://localhost:3001/api" : "https://bengo-backend-xxx.vercel.app/api",
   withCredentials: true,
 });
 
