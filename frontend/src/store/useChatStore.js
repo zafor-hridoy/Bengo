@@ -103,19 +103,14 @@ export const useChatStore = create((set, get) => ({
       isOptimistic: true,
     };
 
-    set((state) => ({
-      messages: [...state.messages, optimisticMessage],
-    }));
+    set({ messages: [...messages, optimisticMessage] });
 
     try {
       const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
-      set((state) => ({
-        messages: state.messages.map((m) => (m._id === tempId ? res.data : m)),
-      }));
+      set({ messages: messages.concat(res.data) });
     } catch (error) {
-      set((state) => ({
-        messages: state.messages.filter((m) => m._id !== tempId),
-      }));
+
+      set({ messages: messages });
       toast.error(error.response?.data?.message || "Something went wrong");
     }
   },
@@ -132,19 +127,21 @@ export const useChatStore = create((set, get) => ({
       const { authUser } = useAuthStore.getState();
 
 
-      const isMessageFromSelectedUser = selectedUser && (newMessage.senderId === selectedUser._id || newMessage.receiverId === selectedUser._id);
+      if (newMessage.senderId === authUser._id) return;
+
+      const isMessageFromSelectedUser = selectedUser && newMessage.senderId === selectedUser._id;
 
       if (isMessageFromSelectedUser) {
+
         const currentMessages = get().messages;
-        if (!currentMessages.find((m) => m._id === newMessage._id)) {
-          set({ messages: [...currentMessages, newMessage] });
-        }
-      } else if (newMessage.senderId !== authUser._id) {
+        set({ messages: [...currentMessages, newMessage] });
+      } else {
+
         set({
           unreadCounts: {
             ...unreadCounts,
-            [newMessage.senderId]: (unreadCounts[newMessage.senderId] || 0) + 1,
-          },
+            [newMessage.senderId]: (unreadCounts[newMessage.senderId] || 0) + 1
+          }
         });
       }
 

@@ -68,8 +68,10 @@ export const sendMessage = async (req, res) => {
 
     await newMessage.save();
 
-    // Emit to both sender and receiver rooms for multi-tab synchronization
-    io.to(senderId.toString()).to(receiverId.toString()).emit("newMessage", newMessage);
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
     res.status(201).json(newMessage);
   } catch (error) {
     console.log("Error in sendMessage controller: ", error.message);

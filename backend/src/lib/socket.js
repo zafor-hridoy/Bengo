@@ -17,29 +17,27 @@ const io = new Server(server, {
 
 io.use(socketAuthMiddleware);
 
-const userSocketMap = {}; // {userId: connectionCount}
 
 export function getReceiverSocketId(userId) {
-  // Now returning the userId itself which acts as a room name
-  return userId;
+  return userSocketMap[userId];
 }
 
+
+const userSocketMap = {};
+
 io.on("connection", (socket) => {
+  console.log("A user connected", socket.user.fullName);
+
   const userId = socket.userId;
-  if (userId) {
-    socket.join(userId);
-    userSocketMap[userId] = (userSocketMap[userId] || 0) + 1;
-  }
+  userSocketMap[userId] = socket.id;
+
 
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
 
+
   socket.on("disconnect", () => {
-    if (userId) {
-      userSocketMap[userId]--;
-      if (userSocketMap[userId] <= 0) {
-        delete userSocketMap[userId];
-      }
-    }
+    console.log("A user disconnected", socket.user.fullName);
+    delete userSocketMap[userId];
     io.emit("getOnlineUsers", Object.keys(userSocketMap));
   });
 });
