@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios";
 import toast from 'react-hot-toast';
 import { io } from "socket.io-client";
 
-const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3001" : "https://bengo-zdu5.vercel.app";
+const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3001" : "https://bengo-zdu5-2f49k9mw6-zafor-hridoys-projects.vercel.app";
 
 export const useAuthStore = create((set, get) => ({
     authUser: null,

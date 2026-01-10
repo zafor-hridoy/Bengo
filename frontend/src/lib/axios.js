@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.MODE === "development" ? "http://localhost:3001/api" : "https://bengo-zdu5.vercel.app/api",
+  baseURL: import.meta.env.MODE === "development" ? "http://localhost:3001/api" : "https://bengo-zdu5-2f49k9mw6-zafor-hridoys-projects.vercel.app/api",
   withCredentials: true,
 });
 
