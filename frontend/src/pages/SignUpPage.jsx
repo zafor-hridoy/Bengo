@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
-import { MessageCircleIcon, LockIcon, MailIcon, UserIcon, LoaderIcon, Sparkles } from "lucide-react";
+import { LockIcon, MailIcon, UserIcon, LoaderIcon, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import BengoLogo from "../components/BengoLogo";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({ fullName: "", email: "", password: "" });
@@ -24,7 +25,7 @@ function SignUpPage() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  
+
   const particles = Array.from({ length: 20 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
@@ -36,7 +37,7 @@ function SignUpPage() {
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center p-4 bg-slate-900 relative overflow-hidden">
-    
+
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {particles.map((particle) => (
           <div
@@ -54,7 +55,7 @@ function SignUpPage() {
         ))}
       </div>
 
-     
+
       <div className="absolute top-1/4 -left-20 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl animate-pulse-slow" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-slate-500/10 rounded-full blur-3xl animate-pulse-slower" />
 
@@ -67,7 +68,7 @@ function SignUpPage() {
 
                 <div className="text-center mb-8 animate-fade-in">
                   <div className="relative inline-block mb-4">
-                    <MessageCircleIcon className="w-12 h-12 mx-auto text-cyan-400 animate-float" />
+                    <BengoLogo className="size-16 mx-auto" showText={false} />
                     <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-cyan-300 animate-pulse" />
                   </div>
                   <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-cyan-200 to-slate-200 mb-2 animate-gradient">
@@ -204,7 +205,7 @@ function SignUpPage() {
                     </span>
                   </div>
 
-             
+
                   <div className="mt-8 space-y-3 text-left max-w-sm mx-auto">
                     <div className="flex items-center gap-3 text-slate-300 animate-slide-in-right" style={{ animationDelay: '0.5s' }}>
                       <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />

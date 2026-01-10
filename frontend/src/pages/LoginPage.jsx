@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import BorderAnimatedContainer from "../components/BorderAnimatedContainer";
-import { MessageCircleIcon, MailIcon, LoaderIcon, LockIcon, Sparkles, Zap, Shield, Users } from "lucide-react";
+import { MailIcon, LoaderIcon, LockIcon, Sparkles, Zap, Shield, Users } from "lucide-react";
 import { Link } from "react-router";
+import BengoLogo from "../components/BengoLogo";
 
 function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -67,7 +68,7 @@ function LoginPage() {
 
                 <div className="text-center mb-8 animate-fade-in">
                   <div className="relative inline-block mb-4">
-                    <MessageCircleIcon className="w-12 h-12 mx-auto text-cyan-400 animate-float" />
+                    <BengoLogo className="size-16 mx-auto" showText={false} />
                     <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-cyan-300 animate-pulse" />
                   </div>
                   <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-cyan-200 to-slate-200 mb-2 animate-gradient">

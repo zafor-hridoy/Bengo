@@ -1,21 +1,26 @@
-import { MessageCircleIcon } from "lucide-react";
+import BengoLogo from "./BengoLogo";
 
 const NoConversationPlaceholder = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center p-6">
-      <div
-        className="size-20 rounded-full flex items-center justify-center mb-6"
-        style={{ backgroundColor: `rgba(var(--primary), 0.2)` }}
-      >
-        <MessageCircleIcon
-          className="size-10"
-          style={{ color: `rgb(var(--primary))` }}
-        />
+    <div className="flex flex-col items-center justify-center h-full text-center p-6 animate-in fade-in zoom-in duration-500">
+      <div className="mb-8">
+        <BengoLogo className="size-40" showText={true} />
       </div>
-      <h3 className="text-xl font-semibold text-slate-200 mb-2">Select a conversation</h3>
-      <p className="text-slate-400 max-w-md">
-        Choose a contact from the sidebar to start chatting or continue a previous conversation.
-      </p>
+
+      <div className="max-w-md space-y-3">
+        <h3 className="text-2xl font-bold text-white tracking-tight">
+          Select a conversation
+        </h3>
+        <p className="text-slate-400 text-lg leading-relaxed">
+          Choose a contact from the sidebar to start chatting or continue your previous conversations with friends.
+        </p>
+      </div>
+
+      <div className="mt-10 flex gap-2">
+        <div className="size-2 rounded-full bg-blue-500 animate-bounce"></div>
+        <div className="size-2 rounded-full bg-blue-500 animate-bounce [animation-delay:0.2s]"></div>
+        <div className="size-2 rounded-full bg-blue-500 animate-bounce [animation-delay:0.4s]"></div>
+      </div>
     </div>
   );
 };
