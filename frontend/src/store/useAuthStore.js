@@ -1,4 +1,4 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 import { axiosInstance } from "../lib/axios";
 import toast from 'react-hot-toast';
 import { io } from "socket.io-client";
@@ -6,11 +6,11 @@ import { io } from "socket.io-client";
 const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:3001" : "https://bengo-zdu5.vercel.app";
 
 export const useAuthStore = create((set, get) => ({
-    authUser: null,
+  authUser: null,
   isCheckingAuth: true,
   isSigningUp: false,
   isLoggingIn: false,
-    socket: null,
+  socket: null,
   onlineUsers: [],
 
 
@@ -28,14 +28,14 @@ export const useAuthStore = create((set, get) => ({
       set({ isCheckingAuth: false });
     }
   },
-    
+
   signup: async (data) => {
     set({ isSigningUp: true });
     try {
       const res = await axiosInstance.post("/auth/signup", data);
       set({ authUser: res.data });
 
-       toast.success("Account created successfully!");
+      toast.success("Account created successfully!");
       get().connectSocket();
     } catch (error) {
       toast.error(error.response?.data?.message || "Signup failed");
@@ -45,7 +45,7 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-login: async (data) => {
+  login: async (data) => {
     set({ isLoggingIn: true });
     try {
       const res = await axiosInstance.post("/auth/login", data);
@@ -63,8 +63,10 @@ login: async (data) => {
 
   logout: async () => {
     try {
+      const { useChatStore } = await import("./useChatStore");
       await axiosInstance.post("/auth/logout");
       set({ authUser: null });
+      useChatStore.getState().clearChatState();
       toast.success("Logged out successfully");
       get().disconnectSocket();
     } catch (error) {
@@ -89,7 +91,7 @@ login: async (data) => {
     if (!authUser || get().socket?.connected) return;
 
     const socket = io(BASE_URL, {
-      withCredentials: true, 
+      withCredentials: true,
     });
 
     socket.connect();
