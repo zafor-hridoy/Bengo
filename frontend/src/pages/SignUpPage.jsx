@@ -15,7 +15,7 @@ function SignUpPage() {
     signup(formData);
   };
 
-  // Track mouse position for interactive effects
+
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -24,7 +24,7 @@ function SignUpPage() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Generate floating particles
+  
   const particles = Array.from({ length: 20 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
@@ -36,7 +36,7 @@ function SignUpPage() {
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center p-4 bg-slate-900 relative overflow-hidden">
-      {/* Floating Particles Background */}
+    
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {particles.map((particle) => (
           <div
@@ -54,7 +54,7 @@ function SignUpPage() {
         ))}
       </div>
 
-      {/* Gradient Orbs */}
+     
       <div className="absolute top-1/4 -left-20 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl animate-pulse-slow" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-slate-500/10 rounded-full blur-3xl animate-pulse-slower" />
 
@@ -204,7 +204,7 @@ function SignUpPage() {
                     </span>
                   </div>
 
-                  {/* Feature highlights */}
+             
                   <div className="mt-8 space-y-3 text-left max-w-sm mx-auto">
                     <div className="flex items-center gap-3 text-slate-300 animate-slide-in-right" style={{ animationDelay: '0.5s' }}>
                       <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
